@@ -4,7 +4,7 @@ ENV NGINX_VERSION 1.19.7
 ENV NGINX_VOD_MODULE_VERSION 1.27
 
 # Tempfix until auth module fixed
-ENV NGINX_AWS_AUTH_VERSION 2.1.1-patch-04062021
+ENV NGINX_AWS_AUTH_VERSION 2.3.0
 
 EXPOSE 80
 
@@ -21,7 +21,7 @@ RUN wget https://github.com/kaltura/nginx-vod-module/archive/${NGINX_VOD_MODULE_
   && rm ${NGINX_VOD_MODULE_VERSION}.tar.gz
 
 # Get nginx aws auth module.
-RUN wget https://github.com/alfg/ngx_aws_auth/archive/${NGINX_AWS_AUTH_VERSION}.tar.gz \
+RUN wget https://github.com/funeralvuecode/ngx_aws_auth/archive/${NGINX_AWS_AUTH_VERSION}.tar.gz \
   && tar zxf ${NGINX_AWS_AUTH_VERSION}.tar.gz \
   && rm ${NGINX_AWS_AUTH_VERSION}.tar.gz
 
