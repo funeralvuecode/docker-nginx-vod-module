@@ -25,7 +25,7 @@ A Dockerized NGINX build with the `nginx-vod-module` and `ngx_aws_auth` for serv
 - AWS_ACCESS_KEY=<aws access key>
 - AWS_SECRET_KEY=<aws secret key>
 - AWS_S3_BUCKET=<aws s3 bucket>
-- AWS_KEY_SCOPE=<aws key scope from script>
+- AWS_REGION=<aws region>
 ```
 
 * Start server:
