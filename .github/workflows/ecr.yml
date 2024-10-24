@@ -51,6 +51,14 @@ jobs:
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
+    - name: Set AWS S3 Bucket
+      run: |
+        if [[ "${{ github.ref_name }}" == "prod" ]]; then
+          echo "AWS_S3_BUCKET=recording.funeralvue.com" >> $GITHUB_ENV
+        else
+          echo "AWS_S3_BUCKET=recording-${{ github.head_ref || github.ref_name }}.funeralvue.com" >> $GITHUB_ENV
+        fi
+
     - name: Fill in the new image ID in the Amazon ECS task definition
       id: task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
@@ -67,7 +75,7 @@ jobs:
           AWS_REGION=us-east-2
           AWS_ACCESS_KEY=${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_S3_BUCKET=recording-${{ github.head_ref || github.ref_name }}.funeralvue.com
+          AWS_S3_BUCKET=${{ env.AWS_S3_BUCKET }}
           PORT=8080
 
     - name: Deploy Amazon ECS task definition
