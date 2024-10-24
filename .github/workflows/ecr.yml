@@ -58,6 +58,7 @@ jobs:
         task-definition-family: fvue-${{ github.head_ref || github.ref_name }}-stream-vod
         container-name: ${{ env.CONTAINER_NAME }}
         image: ${{ steps.build-image.outputs.image }}
+        log-configuration-log-driver: awslogs
         log-configuration-options: |
           awslogs-group=/aws/ecs/fvue-${{ github.head_ref || github.ref_name }}-stream-vod
           awslogs-region=${{ env.AWS_REGION }}
