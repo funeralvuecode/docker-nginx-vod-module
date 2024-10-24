@@ -7,5 +7,5 @@ nginx-vod:
     - PORT=80
     - AWS_ACCESS_KEY=
     - AWS_SECRET_KEY=
-    - AWS_KEY_SCOPE=
+    - AWS_REGION=
     - AWS_S3_BUCKET=
