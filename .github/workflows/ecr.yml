@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - stng
-      - main
+      - prod
 
 env:
   AWS_REGION: ${{vars.AWS_REGION}}
