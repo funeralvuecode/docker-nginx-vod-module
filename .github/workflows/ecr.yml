@@ -56,8 +56,13 @@ jobs:
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
         task-definition: ${{ env.ECS_TASK_DEFINITION }}
+        task-definition-family: fvue-${{ github.head_ref || github.ref_name }}-stream-vod
         container-name: ${{ env.CONTAINER_NAME }}
         image: ${{ steps.build-image.outputs.image }}
+        log-configuration-options: |
+          awslogs-group=/aws/ecs/fvue-${{ github.head_ref || github.ref_name }}-stream-vod
+          awslogs-region=${{ env.AWS_REGION }}
+          awslogs-stream-prefix=fvue-${{ github.head_ref || github.ref_name }}-stream
         environment-variables: |
           AWS_REGION=us-east-2
           AWS_ACCESS_KEY=${{ secrets.AWS_ACCESS_KEY_ID }}
