@@ -36,8 +36,7 @@ RUN cd nginx-${NGINX_VERSION} \
   --error-log-path=/opt/nginx/logs/error.log \
   --http-log-path=/opt/nginx/logs/access.log \
   --with-threads \
-  --with-cc-opt="-O3" \
-  --with-debug
+  --with-cc-opt="-O3"
 RUN cd nginx-${NGINX_VERSION} && make && make install
 
 COPY nginx.remote.conf /usr/local/nginx/conf/nginx.conf.template
