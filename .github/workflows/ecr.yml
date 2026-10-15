@@ -71,10 +71,10 @@ jobs:
           awslogs-group=/aws/ecs/fvue-${{ github.head_ref || github.ref_name }}-stream-vod
           awslogs-region=${{ env.AWS_REGION }}
           awslogs-stream-prefix=fvue-${{ github.head_ref || github.ref_name }}-stream
+        # AWS_ACCESS_KEY / AWS_SECRET_KEY for nginx come from Secrets Manager via the task
+        # definition's "secrets" (fvue-<env>-stream-vod-s3-reader); never put keys here.
         environment-variables: |
           AWS_REGION=us-east-2
-          AWS_ACCESS_KEY=${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_S3_BUCKET=${{ env.AWS_S3_BUCKET }}
           PORT=8080
 
