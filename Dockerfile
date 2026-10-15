@@ -44,6 +44,7 @@ COPY nginx.remote.conf /usr/local/nginx/conf/nginx.conf.template
 # Cleanup.
 RUN rm -rf /var/cache/* /tmp/*
 
-CMD /bin/sh -c "envsubst < /usr/local/nginx/conf/nginx.conf.template > \
+# Only substitute our own env vars; a bare envsubst would also blank nginx variables like $s3_host.
+CMD /bin/sh -c "envsubst '\${PORT} \${AWS_REGION} \${AWS_S3_BUCKET} \${AWS_ACCESS_KEY} \${AWS_SECRET_KEY}' < /usr/local/nginx/conf/nginx.conf.template > \
   /usr/local/nginx/conf/nginx.conf && \
   /usr/local/nginx/sbin/nginx -g 'daemon off;'"
